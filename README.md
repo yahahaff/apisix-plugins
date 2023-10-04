@@ -75,7 +75,7 @@ curl http://http://127.0.0.1:9080/api/clientIp
 {"client_ip":"127.0.0.1"}
 ```
 ## 日志
-如果apisix的日志级别为debug或者info,可查看apisix日志来确认插件是否正确执行
+如果apisix的日志级别为`debug`或`info`,可查看apisix日志来确认插件是否正确执行
 `conf/config.yaml`
 ```shell
 tail -f  logs/error.log
