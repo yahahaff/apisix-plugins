@@ -22,7 +22,7 @@
 
 
 
--- 在头部引入我们所需要的模块
+-- 在头部引入所需要的模块
 local core         =   require("apisix.core")
 
 
@@ -69,9 +69,7 @@ end
 
 -- 日志阶段
 function _M.log(conf, ctx)
-    core.log.error("Custom plugin " .. plugin_name .. " is processing the request.")
+    core.log.info("Custom plugin " .. plugin_name .. " is processing the request.")
 end
-
-
 
 return _M
