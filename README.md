@@ -33,7 +33,7 @@ plugins:                          # plugin list (sorted by priority)
   - request-id                     # priority: 12015
 ...  
 ...
-  #找一个没有被占用的邮件计数值
+  #找一个没有被占用的优先级数值
 ```
 
 ## 更改插件脚本优先级
