@@ -80,6 +80,6 @@ curl http://http://127.0.0.1:9080/api/clientIp
 ```shell
 tail -f  logs/error.log
 
-2022/10/04 15:59:34 [error] 32345#32345: *1310355 [lua] client-ip.lua:64: phase_func(): Custom plugin client-ip is processing the request. while logging request, client: 127.0.0.1, server: _, request: "GET /api/clientIp HTTP/1.1", host: "127.0.0.1:9080"
+2022/10/04 15:59:34 [info] 32345#32345: *1310355 [lua] client-ip.lua:64: phase_func(): Custom plugin client-ip is processing the request. while logging request, client: 127.0.0.1, server: _, request: "GET /api/clientIp HTTP/1.1", host: "127.0.0.1:9080"
 
 ```
