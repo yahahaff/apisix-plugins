@@ -50,6 +50,8 @@ local _M = {
 ## 使插件生效
 ```shell
 systemctl reload apisix
+#查看插件列表
+curl "http://127.0.0.1:9180/apisix/admin/plugins/list" -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1'
 ```
 
 ## 创建路由
