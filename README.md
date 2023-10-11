@@ -65,7 +65,7 @@ curl -X PUT 'http://127.0.0.1:9180/apisix/admin/routes/482183271426993588' \
     "uri": "/client-ip",
     "name": "client-ip", 
     "host": "xxxxx.com",
-    "desc": "自定义插件，暴露公共IP，获取客户端IP并返回",
+    "desc": "自定义插件，暴露公共API，获取客户端IP并返回",
     "plugins": {
         "public-api": {
             "uri": "/apisix/plugin/client-ip"
