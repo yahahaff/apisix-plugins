@@ -53,13 +53,6 @@ function _M.check_schema(conf, schema_type)
     return core.schema.check(schema, conf)
 end
 
--- access执行阶段
-function _M.access(conf, ctx)
-    core.log.info("Processing access request for client IP validation")
-    local remote_addr = ctx.var.remote_addr
-    return 200, { client_ip = remote_addr }
-end
-
 
 -- 公共接口
 function _M.api()
@@ -67,10 +60,15 @@ function _M.api()
         {
             methods = {"GET"},
             uri = "/apisix/plugin/" .. plugin_name,
-            handler = _M.access,
+            handler = function (conf)
+                core.log.info("Processing access request for client IP validation")
+                local remote_addr = ngx.var.remote_addr
+                return 200, { client_ip = remote_addr }
+            end,
         }
     }
 end
+
 
 -- 日志阶段
 function _M.log(conf, ctx)
