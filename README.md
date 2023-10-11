@@ -75,8 +75,8 @@ curl -X PUT 'http://127.0.0.1:9180/apisix/admin/routes/482183271426993588' \
 ```
 ## 验证
 ```shell
-curl http://http://127.0.0.1:9080/api/client-ip
-{"client_ip":"127.0.0.1"}
+curl xxxxx.com/client-ip
+{"client_ip":"192.168.8.120"}
 ```
 ## 日志
 如果apisix的日志级别为`debug`或`info`,可查看apisix日志来确认插件是否正确执行
@@ -84,6 +84,6 @@ curl http://http://127.0.0.1:9080/api/client-ip
 ```shell
 tail -f  logs/error.log
 
-2022/10/04 15:59:34 [info] 32345#32345: *1310355 [lua] client-ip.lua:64: phase_func(): Custom plugin client-ip is processing the request. while logging request, client: 127.0.0.1, server: _, request: "GET /api/clientIp HTTP/1.1", host: "127.0.0.1:9080"
+2022/10/04 15:59:34 [info] 32345#32345: *1310355 [lua] client-ip.lua:64: phase_func(): Custom plugin client-ip in request has been processed! while logging request, client: 192.168.8.120, server: _, request: "GET /clientIp HTTP/1.1", host: "xxxxx.com"
 
 ```
