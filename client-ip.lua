@@ -29,7 +29,7 @@ local core         =   require("apisix.core")
 -- 声明插件名称
 local plugin_name = "client-ip"
 
--- 定义插件 schema 格式
+-- 定义插件 schema 用于验证输入参数格式
 local schema = {
     type = "object",
     properties = {
