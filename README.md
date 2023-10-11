@@ -10,7 +10,9 @@
 </div>
 
 
-一些自定义的Apisix插件
+ 一些自定义的Apisix插件,用于入门学习记录  
+
+ `以下docs 只针对client-ip.lua`
 
 ## 如何使用
 ```shell
@@ -56,24 +58,24 @@ curl "http://127.0.0.1:9180/apisix/admin/plugins/list" -H 'X-API-KEY: edd1c9f034
 
 ## 创建路由
 ```shell
-curl http://127.0.0.1:9180/apisix/admin/routes/custom-plugins-test -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' -X PUT -d '
-{
-  "host": "127.0.0.1",
-  "plugins": {
-    "client-ip": {}
-  },
-  "upstream": {
-    "type": "roundrobin",
-    "nodes": {
-      "127.0.0.1:8080": 1
+curl -X PUT 'http://127.0.0.1:9180/apisix/admin/routes/482183271426993588' \
+    -H 'X-API-KEY: edd1c9f034335f136f87ad84b625c8f1' \
+    -H 'Content-Type: application/json' \
+    -d '{
+    "uri": "/client-ip",
+    "name": "client-ip", 
+    "host": "xxxxx.com",
+    "desc": "自定义插件，暴露公共IP，获取客户端IP并返回",
+    "plugins": {
+        "public-api": {
+            "uri": "/apisix/plugin/client-ip"
+        }
     }
-  },
-  "uri": "/api/clientIp"
 }'
 ```
 ## 验证
 ```shell
-curl http://http://127.0.0.1:9080/api/clientIp
+curl http://http://127.0.0.1:9080/api/client-ip
 {"client_ip":"127.0.0.1"}
 ```
 ## 日志
