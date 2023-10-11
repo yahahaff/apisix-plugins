@@ -50,9 +50,8 @@ function _M.check_schema(conf, schema_type)
     return core.schema.check(schema, conf)
 end
 
-
-
-function _M.access(conf, ctx)
+-- 执行逻辑
+local function get_key()
     local key = "/ssls/451025546319534994"  -- core.etcd已经定义了/apisix prefix，只需从三级目录开始即可
     core.log.info("Processing access request for client IP validation")
     local res, err = core.etcd.get(key)
@@ -65,13 +64,14 @@ function _M.access(conf, ctx)
     return 200,  core.json.encode(res.body.node)
 end
 
+
 -- 公共接口
 function _M.api()
     return {
         {
             methods = {"GET"},
             uri = "/apisix/plugin/" .. plugin_name,
-            handler = _M.access,
+            handler = get_key,
         }
     }
 end
