@@ -22,9 +22,9 @@
 
 
 
--- 在头部引入所需要的模块
+
 local core         =   require("apisix.core")
-local etcd         =   require("apisix.core.etcd")
+
 
 
 
@@ -34,9 +34,7 @@ local plugin_name = "get-keys"
 -- 定义插件 schema 格式
 local schema = {
     type = "object",
-    properties = {
-        keys = {type = "string",minLength = 1,maxLength = 1024}
-    }
+    properties = {}
 }
 
 -- 插件元数据 schema
@@ -63,22 +61,21 @@ function _M.check_schema(conf, schema_type)
 end
 
 
--- access执行阶段
+
 function _M.access(conf, ctx)
-    core.log.info("Processing access request for client IP validation")
-    local value, err = etcd.get("/your_key")
-    if value then
-        core.log.info("Keys in etcd:")
-        for k, v in pairs(value) do
-            core.log.info(k .. ": " .. v)
-        end
+    local key = "/ssls/451025546319534994"  -- core.etcd已经定义了/apisix prefix，只需从三级目录开始即可
+    local remote_addr = ctx.var.remote_addr
+    core.log.info("Processing access request for client IP validation", remote_addr)
+    local res, err = core.etcd.get(key)
+    if res then
+        core.log.debug("Keys in etcd:")
+        core.log.debug("res: ", core.json.encode(res.body.node))
     else
         core.log.error("Error while fetching etcd key: " .. (err or "Unknown error"))
     end
-    return 200, { key_values = value }  -- 返回键值对的表
+    return 200,  core.json.encode(res.body.node)
 end
 
--- 日志阶段
 function _M.log(conf, ctx)
     core.log.error("Custom plugin " .. plugin_name .. " is processing the request.")
 end
